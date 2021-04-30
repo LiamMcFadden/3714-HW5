@@ -19,7 +19,7 @@ public class MyCanvas extends View {
         super(context, attrs);
         activePaths = new HashMap<>();
         pathPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        pathPaint.setColor(Color.BLACK);
+        pathPaint.setColor(Color.RED);
         pathPaint.setStyle(Paint.Style.STROKE);
         pathPaint.setStrokeWidth(70);
     }

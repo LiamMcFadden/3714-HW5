@@ -2,4 +2,10 @@
     <string name="app_name">3714-HW5</string>
     <string name="start">Start</string>
     <string name="finger_painter">Finger Painter</string>
+    <string name="undo">Undo</string>
+    <string name="clear">Clear</string>
+    <string name="done">Done</string>
+    <string name="red">Red</string>
+    <string name="blue">Blue</string>
+    <string name="green">Green</string>
 </resources>
