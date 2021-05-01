@@ -36,6 +36,11 @@ public class TouchListener implements View.OnTouchListener {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_POINTER_UP:
             case MotionEvent.ACTION_CANCEL:
+               // for(int i= 0, size = motionEvent.getPointerCount(); i< size; i++){
+               //     int id = motionEvent.getPointerId(i);
+               //     canvasActivity.removePath(id);
+               // }
+               // break;
         }
         return true;
     }
@@ -45,13 +50,13 @@ public class TouchListener implements View.OnTouchListener {
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onDoubleTap(MotionEvent e) {
-            canvasActivity.onDoubleTap();
+            canvasActivity.onDoubleTap(e.getX(), e.getY());
             return super.onDoubleTap(e);
         }
 
         @Override
         public void onLongPress(MotionEvent e) {
-            canvasActivity.onLongPress();
+            canvasActivity.onLongPress(e.getX(), e.getY());
             super.onLongPress(e);
         }
     }
