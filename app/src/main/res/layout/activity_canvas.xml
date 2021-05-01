@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CanvasActivity">
+    android:id="@+id/canvas_layout">
 
-    <ImageView
+    <com.example.a3714_hw5.MyCanvas
+        android:id="@+id/myCanvas"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/bground_image"/>
+        android:layout_height="match_parent" />
 
     <Button
         android:id="@+id/undo_button"
@@ -18,9 +16,9 @@
         android:text="@string/undo"
         android:textColor="@color/black"
         android:backgroundTint="@color/white"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:id="@+id/clear_button"
@@ -39,9 +37,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/done"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentEnd="true"/>
 
     <Button
         android:id="@+id/red_button"
@@ -50,8 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/red"
-        android:layout_marginLeft="20dp"
-        android:layout_alignParentLeft="true"/>
+        android:layout_marginStart="20dp"
+        android:layout_alignParentStart="true"/>
 
     <Button
         android:id="@+id/blue_button"
@@ -69,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/green"
-        android:layout_marginRight="20dp"
-        android:layout_alignParentRight="true"/>
+        android:layout_marginEnd="20dp"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

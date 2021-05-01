@@ -81,9 +81,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE) {
             File imgFile = new File(pictureImagePath);
             if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                intent.putExtra("image", myBitmap);
+                intent.putExtra("path", imgFile.getAbsolutePath());
                 startActivity(intent);
             }
         }
