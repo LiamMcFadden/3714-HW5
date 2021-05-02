@@ -9,17 +9,18 @@ import android.util.AttributeSet;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 
 public class MyCanvas extends View {
-    HashMap <Integer, Path> activePaths;
+    HashMap <Integer, MyPath> activePaths;
+    ArrayList<MyPath> activePathsList;
     ArrayList<MyBitmap> activeImages;
     Paint pathPaint;
 
     public MyCanvas(Context context, AttributeSet attrs) {
         super(context, attrs);
         activeImages = new ArrayList<>();
+        activePathsList = new ArrayList<>();
         activePaths = new HashMap<>();
         pathPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         pathPaint.setColor(Color.RED);
@@ -29,8 +30,8 @@ public class MyCanvas extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        for(Path path: activePaths.values()){
-            canvas.drawPath(path, pathPaint);
+        for (MyPath path : activePathsList) {
+            canvas.drawPath(path.path, path.paint);
         }
         for (MyBitmap bitmap: activeImages) {
             canvas.drawBitmap(bitmap.bitmap, bitmap.x, bitmap.y, null);
@@ -41,38 +42,41 @@ public class MyCanvas extends View {
     public void addPath(int id, float x, float y) {
         Path path = new Path();
         path.moveTo(x, y);
-        activePaths.put(id, path);
+        MyPath myPath = new MyPath(path, pathPaint, id);
+        activePaths.put(id, myPath);
+        activePathsList.add(myPath);
         invalidate();
     }
 
     public void updatePath(int id, float x, float y) {
-        Path path = activePaths.get(id);
-        if(path != null){
-            path.lineTo(x, y);
+        MyPath myPath = activePaths.get(id);
+        if(myPath != null){
+            myPath.path.lineTo(x, y);
         }
+        activePathsList.remove(myPath);
+        activePathsList.add(myPath);
         invalidate();
     }
 
     public void removePath(int id) {
         if(activePaths.containsKey(id)){
             activePaths.remove(id);
+            activePathsList.remove(activePaths.get(id));
+            System.out.println(activePaths.size() + " " + activePathsList.size());
         }
         invalidate();
     }
 
     public void undo() {
-        if (activePaths.size() == 0) return;
-        int maxId = 0;
-        for (Map.Entry<Integer, Path> entry : activePaths.entrySet()) {
-            maxId = entry.getKey() > maxId ? entry.getKey() : maxId;
-        }
-        removePath(maxId);
+        if (activePathsList.size() == 0) return;
+        MyPath temp = activePathsList.get(activePathsList.size()-1);
+        activePathsList.remove(temp);
+        removePath(temp.id);
     }
 
     public void clear() {
-        for (Map.Entry<Integer, Path> entry : activePaths.entrySet())
-            removePath(entry.getKey());
-
+        activePaths.clear();
+        activePathsList.clear();
         activeImages.clear();
         invalidate();
     }
