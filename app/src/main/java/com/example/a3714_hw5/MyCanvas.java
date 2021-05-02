@@ -62,7 +62,6 @@ public class MyCanvas extends View {
         if(activePaths.containsKey(id)){
             activePaths.remove(id);
             activePathsList.remove(activePaths.get(id));
-            System.out.println(activePaths.size() + " " + activePathsList.size());
         }
         invalidate();
     }
